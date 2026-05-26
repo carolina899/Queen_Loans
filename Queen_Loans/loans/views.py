@@ -51,4 +51,24 @@ def registrar_usuario(request):
             
             return HttpResponse("Usuario y Cliente creados con éxito. Redirigiendo...")
             
-    return render(request, 'tu_plantilla_de_registro.html')
+    return render(request, 'login.html')
+
+def loan_list(request):
+    """Vista para listar todos los préstamos"""
+    return HttpResponse("Visualización de la lista de préstamos (Próximamente).")
+
+def loan_create(request):
+    """Vista para crear un nuevo préstamo"""
+    return HttpResponse("Formulario para solicitar un préstamo (Próximamente).")
+
+def loan_detail(request, loan_id):
+    """Vista para ver el detalle de un préstamo específico"""
+    return HttpResponse(f"Detalles del préstamo con ID: {loan_id}")
+
+def loan_update(request, loan_id):
+    """Vista para actualizar o editar un préstamo"""
+    return HttpResponse(f"Formulario para editar el préstamo con ID: {loan_id}")
+
+def loan_delete(request, loan_id):
+    """Vista para eliminar un préstamo"""
+    return HttpResponse(f"Préstamo con ID {loan_id} eliminado con éxito.")

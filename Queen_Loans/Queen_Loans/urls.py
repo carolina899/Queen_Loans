@@ -13,6 +13,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Conectar las URLs de la app prestamos
-    path('', include('prestamos.urls')),
+    path('', include('loans.urls')),
 
 ]
