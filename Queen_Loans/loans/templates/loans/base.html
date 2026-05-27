@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Queen Loans - Banco</title>
+    <style>
+        /* Estilo básico hecho a mano */
+        body { font-family: 'Arial', sans-serif; background-color: #f0f0f0; margin: 0; padding: 0; }
+        header { background-color: #222; color: gold; padding: 20px; text-align: center; border-bottom: 5px solid gold; }
+        nav { background: #444; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-size: 14px; }
+        .caja-principal { background: white; width: 80%; max-width: 500px; margin: 30px auto; padding: 20px; border: 1px solid #bbb; border-radius: 8px; box-shadow: 5px 5px 10px rgba(0,0,0,0.1); }
+        .footer { text-align: center; font-size: 12px; color: #777; margin-top: 20px; }
+        input { width: 95%; padding: 8px; margin: 10px 0; border: 1px solid #ccc; }
+        button { background-color: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; width: 100%; font-weight: bold; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>👑 QUEEN LOANS 👑</h1>
+    <p>Tu dinero seguro con nosotros</p>
+</header>
+
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/login">Entrar</a>
+    <a href="/register">Crear Cuenta</a>
+</nav>
+
+<div class="caja-principal">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<div class="footer">
+    <p>© 2026 Banco Queen Loans - Tijuana, México</p>
+</div>
+
+</body>
+</html>
