@@ -25,17 +25,6 @@ Aplicación web de gestión de préstamos desarrollada con **Django**, **Python*
 5. **Administrador** - Usuarios administradores del sistema
 
 ### Relaciones de Base de Datos
-
-```
-Cliente (1) ──→ (N) Préstamo
-                     ↓
-                   Pago (N)
-                     
-Categoría (N) ←→ (N) Préstamo  [Many-to-Many]
-
-Administrador ←→ Django User [One-to-One]
-```
-
 **Relaciones:**
 - **Cliente → Préstamo**: Uno a Muchos (1:N)
 - **Préstamo → Pago**: Uno a Muchos (1:N)
@@ -71,8 +60,9 @@ Queen_Loans/
 ## 🚀 Instalación
 
 ### Requisitos
-- Python 3.8+
-- pip
+- Python
+- pillow
+- django
 
 ### Pasos
 
@@ -83,10 +73,10 @@ cd Queen_Loans
 
 # Crear entorno virtual
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+Windows: venv\Scripts\activate
 
 # Instalar dependencias
-pip install -r requirements.txt
+pip install django==5.2 pillow
 
 # Aplicar migraciones
 python manage.py migrate
@@ -124,44 +114,8 @@ El panel administrativo permite:
 - **Filtros avanzados**: Buscar por estado, fecha, cliente, etc.
 - **Visualización de relaciones**: Ver préstamos por cliente, pagos por préstamo, categorías asignadas
 
-## 📋 Ejemplos de Uso
 
-### Crear un préstamo con categorías
 
-```python
-# Desde Django shell
-from loans.models import Cliente, Prestamo, Categoria
-
-cliente = Cliente.objects.get(id=1)
-prestamo = Prestamo.objects.create(
-    cliente=cliente,
-    monto=5000.00,
-    tasa_interes=5.5,
-    fecha_vencimiento='2026-12-31',
-    estado='pendiente'
-)
-
-# Asignar categorías (Many-to-Many)
-categoria1 = Categoria.objects.get(nombre='Personal')
-categoria2 = Categoria.objects.get(nombre='Educativo')
-prestamo.categorias.add(categoria1, categoria2)
-```
-
-### Registrar un pago
-
-```python
-from loans.models import Pago
-
-pago = Pago.objects.create(
-    prestamo=prestamo,
-    monto_pagado=1000.00,
-    metodo_pago='transferencia'
-)
-```
-
-## 👤 Autor
-
-**Carolina**  
 GitHub: [@carolina899](https://github.com/carolina899)
 
 ## 📄 Licencia

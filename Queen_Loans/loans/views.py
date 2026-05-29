@@ -14,7 +14,10 @@ def loan_create(request):
     if request.method == "POST":
         form = PrestamoForm(request.POST)
         if form.is_valid():
-            prestamo = form.save()
+            prestamo = form.save(commit=False)
+            prestamo.tasa_interes = 5.0
+            prestamo.save()
+            form.save_m2m()
             messages.success(request, "Préstamo creado exitosamente")
             return redirect("Loans:loan_detail", loan_id=prestamo.id)
     else:
@@ -49,7 +52,7 @@ def loan_delete(request, loan_id):
     return render(request, "loans/loan_confirm_delete.html", {"prestamo": prestamo})
 
 
-def registrar_usuario(request):
+def register_user(request):
     if request.method == "POST":
         form = RegistroClienteForm(request.POST)
         if form.is_valid():

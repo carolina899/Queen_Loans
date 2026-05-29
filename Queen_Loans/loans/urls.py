@@ -14,6 +14,6 @@ urlpatterns = [
     path("<int:loan_id>/delete/", views.loan_delete, name="loan_delete"),
 
     
-    path("registrar/", views.registrar_usuario, name="registrar_usuario"),
+    path("register/", views.register_user, name="register_user"),
 ]
 

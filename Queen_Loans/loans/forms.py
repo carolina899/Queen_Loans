@@ -20,7 +20,7 @@ class RegistroClienteForm(forms.ModelForm):
 class PrestamoForm(forms.ModelForm):
     class Meta:
         model = Prestamo
-        fields = ('cliente', 'monto', 'tasa_interes', 'fecha_vencimiento', 'estado', 'categorias')
+        fields = ('cliente', 'monto', 'fecha_vencimiento', 'estado', 'categorias')
 
 
 class PagoForm(forms.ModelForm):
