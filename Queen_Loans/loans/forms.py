@@ -1,17 +1,29 @@
-# forms.py
+from django import forms
+from .models import Cliente, Prestamo, Pago
 
-print("===== USER FORM =====")
 
-first_name = input("First Name: ")
-last_name = input("Last Name: ")
-age = input("Age: ")
-email = input("Email: ")
-phone = input("Phone Number: ")
+class RegistroClienteForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    password_confirm = forms.CharField(widget=forms.PasswordInput)
+    
+    class Meta:
+        model = Cliente
+        fields = ('nombre', 'apellido', 'email', 'telefono', 'direccion')
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        if cleaned_data.get('password') != cleaned_data.get('password_confirm'):
+            raise forms.ValidationError("Las contraseñas no coinciden")
+        return cleaned_data
 
-print("\n===== SAVED INFORMATION =====")
-print("Full Name:", first_name, last_name)
-print("Age:", age)
-print("Email:", email)
-print("Phone Number:", phone)
 
-print("\nForm completed successfully.")
+class PrestamoForm(forms.ModelForm):
+    class Meta:
+        model = Prestamo
+        fields = ('cliente', 'monto', 'tasa_interes', 'fecha_vencimiento', 'estado', 'categorias')
+
+
+class PagoForm(forms.ModelForm):
+    class Meta:
+        model = Pago
+        fields = ('prestamo', 'monto_pagado', 'metodo_pago')
