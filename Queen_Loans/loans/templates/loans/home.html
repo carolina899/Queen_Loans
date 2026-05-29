@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen Loans - Panel de Control</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 min-h-screen antialiased text-slate-800">
+
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">👑</span>
+                    <span class="text-xl font-black tracking-tight text-slate-950">Queen Loans</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="{% url 'Loans:registrar_usuario' %}" class="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">
+                        Registrar Cliente
+                    </a>
+                    <a href="{% url 'Loans:loan_create' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-xl shadow-xs transition-all cursor-pointer">
+                        + Nuevo Préstamo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        {% if messages %}
+            <div class="mb-6 space-y-2">
+                {% for message in messages %}
+                    <div class="p-4 text-sm rounded-xl {% if message.tags == 'error' %}bg-red-50 text-red-600 border border-red-100{% else %}bg-green-50 text-green-600 border border-green-100{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="mb-8">
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Panel de Administración</h1>
+            <p class="text-slate-500 mt-1">Monitoreo global de créditos, clientes y cobranzas.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
+                <p class="text-sm font-medium text-slate-400 uppercase tracking-wider">Total Colocado</p>
+                <p class="text-3xl font-bold text-slate-900 mt-2">$24,500.00</p>
+                <span class="text-xs text-emerald-600 font-medium mt-1 inline-block">↑ 12% este mes</span>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
+                <p class="text-sm font-medium text-slate-400 uppercase tracking-wider">Préstamos Activos</p>
+                <p class="text-3xl font-bold text-slate-900 mt-2">{{ prestamos|length }}</p>
+                <span class="text-xs text-slate-400 mt-1 inline-block">Créditos vigentes hoy</span>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
+                <p class="text-sm font-medium text-slate-400 uppercase tracking-wider">Tasa Promedio</p>
+                <p class="text-3xl font-bold text-indigo-600 mt-2">14.5%</p>
+                <span class="text-xs text-slate-400 mt-1 inline-block">Interés anual promedio</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Listado de Préstamos</h2>
+                    <p class="text-sm text-slate-400 mt-0.5">Historial de solicitudes de crédito y estados de pago.</p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50/75 border-b border-slate-100 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            <th class="px-6 py-4">ID</th>
+                            <th class="px-6 py-4">Cliente</th>
+                            <th class="px-6 py-4">Monto</th>
+                            <th class="px-6 py-4">Interés</th>
+                            <th class="px-6 py-4">Vencimiento</th>
+                            <th class="px-6 py-4">Estado</th>
+                            <th class="px-6 py-4 text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        {% for prestamo in prestamos %}
+                        <tr class="hover:bg-slate-50/50 transition-colors">
+                            <td class="px-6 py-4 font-mono font-medium text-slate-400">#{{ prestamo.id }}</td>
+                            <td class="px-6 py-4 font-semibold text-slate-900">
+                                {{ prestamo.cliente.nombre }} {{ prestamo.cliente.apellido }}
+                            </td>
+                            <td class="px-6 py-4 font-medium text-slate-900">${{ prestamo.monto }}</td>
+                            <td class="px-6 py-4 text-slate-500">{{ prestamo.tasa_interes }}%</td>
+                            <td class="px-6 py-4 text-slate-500">{{ prestamo.fecha_vencimiento|date:"d/m/Y" }}</td>
+                            <td class="px-6 py-4">
+                                {% if prestamo.estado == 'pagado' %}
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">Pagado</span>
+                                {% elif prestamo.estado == 'atrasado' %}
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200">Atrasado</span>
+                                {% else %}
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">Pendiente</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <a href="{% url 'Loans:loan_detail' prestamo.id %}" class="text-indigo-600 hover:text-indigo-900 font-medium text-xs transition-colors">Ver</a>
+                                <a href="{% url 'Loans:loan_update' prestamo.id %}" class="text-slate-500 hover:text-slate-800 font-medium text-xs transition-colors">Editar</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="7" class="px-6 py-12 text-center text-slate-400">
+                                <span class="text-2xl block mb-2">📁</span>
+                                No hay préstamos registrados en el sistema todavía.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-slate-100 text-center text-xs text-slate-400">
+        &copy; 2026 Queen Loans. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
