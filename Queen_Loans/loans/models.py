@@ -8,6 +8,7 @@ class Cliente(models.Model):
     telefono = models.CharField(max_length=15, blank=True, null=True)
     direccion = models.TextField(blank=True, null=True)
     fecha_registro = models.DateTimeField(default=timezone.now)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
