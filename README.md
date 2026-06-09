@@ -152,7 +152,7 @@ Queen_Loans/
 ├── requirements.txt
 └── .gitignore
 ```
-![Diagrama de modelos](Queen_Loans/Queen_Loans/screenshots/diagrama.png)
+![Diagrama de modelos](Queen_Loans/Queen_Loans/screenshots/diagrama2.png)
 
 ## 🚀 Instalación
 
