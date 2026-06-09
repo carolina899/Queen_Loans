@@ -152,7 +152,7 @@ Queen_Loans/
 ├── requirements.txt
 └── .gitignore
 ```
-![Diagrama de modelos](./Queen_Loans/screenshots/diagrama.png)
+![Diagrama de modelos](Queen_Loans/Queen_Loans/screenshots/diagrama.png)
 
 ## 🚀 Instalación
 
@@ -200,13 +200,13 @@ python manage.py runserver
 | HTML | 5 |
 | CSS | 3 |
 ## App 
-![Crear Cuenta](./Queen_Loans/screenshots/crearcuenta.png)
+![Crear Cuenta](Queen_Loans/Queen_Loans/screenshots/crearcuenta.png)
 
-![Inicio de Sesión](./Queen_Loans/screenshots/iniciodesesion.png)
+![Inicio de Sesión](Queen_Loans/Queen_Loans/screenshots/iniciodesesion.png)
 
-![Panel Principal](./Queen_Loans/screenshots/panel.png)
+![Panel Principal](Queen_Loans/Queen_Loans/screenshots/panel.png)
 
-![Préstamo](./Queen_Loans/screenshots/prestamo.png)
+![Préstamo](Queen_Loans/Queen_Loans/screenshots/prestamo.png)
 
 ## 🔐 Funcionalidades del Admin
 
