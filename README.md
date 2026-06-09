@@ -219,6 +219,8 @@ python manage.py runserver
 - **Filtros avanzados**: Buscar por estado, fecha, cliente, etc.
 - **Visualización de relaciones**: Ver préstamos por cliente, pagos por préstamo, categorías asignadas
 
+## CONCLUSIONES FINALES
+En conclusión, QueenLoans nos ayudó a aprender mejor cómo funciona una aplicación web y todo lo que se necesita para desarrollarla. Durante el proyecto usamos Django y SQLite para crear un sistema capaz de registrar clientes, préstamos y pagos de forma organizada. Aunque tuvimos errores, confusiones y momentos donde el código no quería funcionar, poco a poco logramos resolver los problemas y terminar el proyecto entre todos. Este trabajo nos ayudó a aprender más sobre programación, bases de datos y trabajo en equipo, además de darnos una mejor idea de cómo se desarrolla un sistema real. 
 
 
 GitHub: [@carolina899](https://github.com/carolina899)
